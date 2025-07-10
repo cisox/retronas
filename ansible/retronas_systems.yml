@@ -1,3 +1,4 @@
+---
 #                            __________________________
 #                       .-:=[ RetroNAS_Systems_Mapping ]=:-.
 #
@@ -10,7 +11,7 @@
 #
 
 
-system_map: "{{ 
+system_map: "{{
   []
   |union(general_distribution)
   |union(general_engines)
