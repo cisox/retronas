@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  gather_facts: yes
+  gather_facts: true
 
   vars:
     my_name: hb-store-cdn
@@ -13,10 +13,15 @@
     packages:
       - git
       - npm
-      - libnode108
       - gcc
       - g++
       - build-essential
+
+    packages_debian:
+      debian12:
+        - libnode108
+      debian13:
+        - libnode115
 
     paths:
       - { name: "{{ my_name }}",    dest: "{{ retronas_root }}/bin",                state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
@@ -47,8 +52,15 @@
       name: retronas.role.package.latest
 
   - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+    vars:
+      packages: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
+    when: ansible_distribution == 'Debian'
+    notify: "{{ my_name }} - Restart service"
+
+  - ansible.builtin.import_role:
       name: retronas.role.paths
-      
+
   - name: "{{ my_name }} - build layout"
     ansible.builtin.file:
       src: "{{ retronas_path }}/roms/sony/playstation4/pkg"
@@ -70,7 +82,7 @@
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
-      daemon_reload: yes
+      daemon_reload: true
     with_items:
       "{{ systemd_units }}"
     when:
@@ -82,7 +94,7 @@
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
-      daemon_reload: yes
+      daemon_reload: true
     with_items:
       "{{ systemd_units }}"
     when:
@@ -106,10 +118,10 @@
     ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
-      daemon_reload: yes
+      daemon_reload: true
     with_items:
       "{{ systemd_units }}"
-    when: 
+    when:
       - item.restart == 'yes'
       - item.instance == 'no'
 
@@ -117,10 +129,10 @@
     ansible.builtin.service:
       name: "{{ item.1.name }}{{ item.0.dest }}.{{ item.1.type }}"
       state: restarted
-      daemon_reload: yes
+      daemon_reload: true
     with_items:
       - "{{ system_map }}"
       - "{{ systemd_units }}"
-    when: 
+    when:
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
