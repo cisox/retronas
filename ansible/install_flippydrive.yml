@@ -20,6 +20,10 @@
     firewalld_ports:
       - { port: 7031, protocol: tcp }
 
+    packages:
+      - unzip
+      - curl
+
   tasks:
 
     - ansible.builtin.assert:
@@ -34,6 +38,9 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
+
+    - ansible.builtin.import_role:
+        name: retronas.role.package.latest
 
     - ansible.builtin.import_role:
         name: retronas.role.paths
