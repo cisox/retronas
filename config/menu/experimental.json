@@ -71,6 +71,17 @@
               "group": "",
               "command": "xbox360_netiso",
               "args": ""
+            },
+            {
+              "index": "07",
+              "title": "netmount",
+              "description": "DOS NetMount service",
+              "id": "netmount",
+              "prompt": "",
+              "type": "dialog",
+              "group": "",
+              "command": "netmount",
+              "args": ""
             }
         ]
     }
