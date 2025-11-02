@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "MiSTer Organize Tool",
-        "description": "MiSTer Organize is a project providnge a curated list of romsets compatible with the MiSTer project, place your roms in to the romimport folder and if identified they will be moved into RomRoot on the share, you may then move them into your main MiSTer share/sd as you please",
+        "description": "MiSTer Organize is a project providing a curated list of software compatible with the MiSTer project||Place your software in to the romimport folder and run the tool; if identified the software will be moved into the RomRoot folder, you may then move the software onto your main MiSTer share/sd etc",
         "id":"mister-organize-menu",
         "prompt": "",
         "type": "menu",
