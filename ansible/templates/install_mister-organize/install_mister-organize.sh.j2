@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -ue
+
+ROMVAULT=3.7.4
+MISTORG="{{ retronas_path }}/{{ module_name }}"
+
+cd "${MISTORG}"
+
+case $(uname -m) in
+  x86_64)
+    ARCH=x64
+    ;;
+  *)
+    echo "Unsupported Architecture"
+    ;;
+esac
+
+DIRS=(
+ DatRoot
+ RomRoot
+)
+
+# Create RomVault Directories
+for DIR in ${DIRS[@]}
+do
+ [ ! -d $DIR ] && mkdir $DIR
+done
+ln -sfT ../romimport ToSort
+
+# Setup RomVault Config
+RVNAME="RomVault Basic Setup"
+if [ -f "${RVNAME}.zip" ]
+then
+  unzip -jo "${RVNAME}.zip" "${RVNAME}/RomVault3cfg.xml"
+fi
+
+# Move Dat files
+rm -f "${MISTORG}/DatRoot/MiSTer_*.dat"
+find $MISTORG -maxdepth 1 -name "*.dat" -exec mv "{}" DatRoot/ \;
+# Unpack the console dat file that is zipped
+find $MISTORG -maxdepth 1 -name "MiSTer_Console*.zip" -exec unzip -jo -d DatRoot/ {} \;
+
+# Clean up
+cd $MISTORG
+rm -f *.zip
+
+# Obtain RomVault for Linux
+RVZIP=RVCmd_V${ROMVAULT}-Linux-${ARCH}.zip
+cd /tmp
+curl -skLO https://www.romvault.com/download/${RVZIP}
+if [ -f ${RVZIP} ]
+then
+  unzip -o ${RVZIP} -d $MISTORG
+  chmod +x ${MISTORG}/RomVaultCmd
+  rm -f $RVZIP
+else
+  echo "Failed to download"
+  exit 1
+fi
+
+chown -R {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/{{ module_name }}

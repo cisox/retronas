@@ -1,0 +1,54 @@
+{
+    "menu": 
+    {
+        "title": "MiSTer Organize Tool",
+        "description": "MiSTer Organize is a project providnge a curated list of romsets compatible with the MiSTer project, place your roms in to the romimport folder and if identified they will be moved into RomRoot on the share, you may then move them into your main MiSTer share/sd as you please",
+        "id":"mister-organize-menu",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install",
+                "id":"mister-organize-install",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "mister-organize"
+            },
+            {
+                "index":"03",
+                "title": "Run",
+                "description": "Run MiSTer Organize",
+                "id":"mister-organize",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "mister-organize",
+                "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "mister-organize.md",
+                "args": ""
+            }
+        ]
+    }
+}

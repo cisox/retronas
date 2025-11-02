@@ -82,6 +82,17 @@
               "group": "",
               "command": "netmount",
               "args": ""
+            },
+            {
+              "index": "08",
+              "title": "mister-organize",
+              "description": "MiSTer Organize",
+              "id": "mister-organize",
+              "prompt": "",
+              "type": "dialog",
+              "group": "",
+              "command": "mister-organize",
+              "args": ""
             }
         ]
     }

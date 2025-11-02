@@ -1,0 +1,63 @@
+---
+- hosts: localhost
+
+  vars:
+    my_name: "MiSTer Organize"
+    my_file: "install_mister-organize"
+    module_name: "mister-organize"
+
+    packages:
+      - git
+      - curl
+
+    paths:
+      - { name: "mister-organize", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "romimport", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: true}
+      - { name: "mister-organize.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
+  tasks:
+
+    - ansible.builtin.assert:
+        that: ansible_architecture == "x86_64"
+        fail_msg: "Unsupported architecture"
+
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
+
+    - name: "{{ my_name }} - Load RetroNAS Systems"
+      ansible.builtin.include_vars: retronas_systems.yml
+
+    - ansible.builtin.import_role:
+        name: retronas.role.package.latest
+
+    - ansible.builtin.import_role:
+        name: retronas.role.paths
+
+    - ansible.builtin.import_role:
+        name: retronas.role.templates
+
+    - name: "{{ my_name }} - Install from project repo"
+      ansible.builtin.git: 
+        repo: "https://github.com/MiSTerOrganize/MiSTerOrganize.git"
+        dest: "{{ retronas_path}}/{{ module_name }}"
+        single_branch: true
+        clone: true
+        update: true
+        force: true
+
+    - name: "{{ my_name }} - setup local"
+      ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1"
+
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config
+
+    - ansible.builtin.import_role:
+        name: retronas.role.samba
+
+    - ansible.builtin.import_role:
+        name: retronas.role.samba.system
+      vars:
+        system_key: "{{ module_name }}"
