@@ -52,8 +52,7 @@
         state: link
       loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
       when: internal_symlinks is defined and
-        top_level_paths is defined and
-        (nolink | default(false)) is not defined
+        top_level_paths is defined
 
     - name: "{{ my_name }} - build internal directory layout with symlinks"
       ansible.builtin.file:
