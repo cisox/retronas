@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+SRCDIR="{{ retronas_root }}/src"
+REPO=sit
+OWNER=thecloudexpanse
+
+XC=(
+  sit
+  macbinfilt
+)
+
+cd $SRCDIR
+git clone https://github.com/${OWNER}/${REPO}
+cd ${REPO}
+
+make
+
+for X in ${XC[@]}
+do
+  [ ! -f ${X} ] && echo "${X} not found" && exit 1
+  chmod +x ${X}
+  mv ${X} ${RN_BIN}/
+done
+
+# CLEAN UP
+rm -Rf ${SRCDIR}/

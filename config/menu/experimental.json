@@ -93,6 +93,17 @@
               "group": "",
               "command": "mister-organize",
               "args": ""
+            },
+            {
+              "index": "09",
+              "title": "sit",
+              "description": "Create StuffIt archives on Unix systems",
+              "id": "sit",
+              "prompt": "",
+              "type": "install",
+              "group": "",
+              "command": "sit",
+              "args": ""
             }
         ]
     }
