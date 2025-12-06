@@ -411,13 +411,13 @@
       },
       {
         "index": "38",
-        "title": "macproxy",
+        "title": "macproxy classic",
         "description": "Proxy for retro computers",
-        "id": "macproxy",
+        "id": "macproxy_classic",
         "prompt": "",
         "type": "dialog",
         "group": "",
-        "command": "macproxy",
+        "command": "macproxy_classic",
         "args": ""
       },
       {

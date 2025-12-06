@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "macproxy",
-        "description": "Install macproxy",
-        "id":"macproxy",
+        "title": "macproxy classic",
+        "description": "Install macproxy classic",
+        "id":"macproxy_classic",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,12 +21,12 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install macproxy",
-                "id":"macproxy",
+                "description": "Install macproxy classic",
+                "id":"macproxy_classic",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "macproxy",
+                "command": "macproxy_classic",
                 "args": ""
             },
             {
