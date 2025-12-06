@@ -1,11 +1,11 @@
 [Unit]
-Description=Macproxy service
+Description=Macproxy Classic service
 After=network.target
 
 [Service]
 Type=simple
 Restart=always
-ExecStart=/opt/macproxy/start_macproxy.sh
+ExecStart=/opt/macproxy_classic/start_macproxy.sh
 SyslogIdentifier=MACPROXY
 
 [Install]

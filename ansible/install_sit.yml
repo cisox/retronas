@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    my_name: "sit"
+    my_file: "install_sit"
+    module_name: "sit"
+
+    packages:
+      - make
+      - gcc
+      - git
+      - coreutils
+
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+
+  tasks:
+
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
+
+    - ansible.builtin.import_role:
+        name: retronas.role.package.latest
+
+    - ansible.builtin.import_role:
+        name: retronas.role.templates
+
+    - name: "{{ my_name }} - build source"
+      ansible.builtin.command:
+        cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+        creates: "/usr/local/bin/sit"
+
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

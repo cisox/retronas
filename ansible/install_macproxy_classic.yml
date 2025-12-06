@@ -3,22 +3,24 @@
   gather_facts: false
 
   vars:
-    my_name: "macproxy"
-    my_file: "install_macproxy"
-    module_name: "macproxy"
+    my_name: "macproxy_classic"
+    my_file: "install_macproxy_classic"
+    module_name: "macproxy_classic"
 
     packages:
       - python3
       - python3-venv
       - python3-pip
 
-    templates:
-      - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
+    service_name: "macproxy"
 
-    repo: https://github.com/rdmark/macproxy.git
+    templates:
+      - { name: "{{ service_name }}.service", dest: "/etc/systemd/system" }
+
+    repo: https://github.com/rdmark/macproxy_classic.git
 
     firewalld_ports:
-      - { port: 5000, protocol: tcp }
+      - { port: 5001, protocol: tcp }
 
   tasks:
 
@@ -45,7 +47,7 @@
   handlers:
     - name: "{{ my_name }} Restart Services"
       ansible.builtin.service:
-        name: "{{ my_name }}.service"
+        name: "{{ service_name }}.service"
         state: started
         enabled: true
         daemon_reload: true

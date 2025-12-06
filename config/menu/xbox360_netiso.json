@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "macproxy",
-        "description": "Install macproxy",
-        "id":"macproxy",
+        "title": "Xbox360 NetISO",
+        "description": "Install Xbox360 NetISO",
+        "id":"xbox360_netiso",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,12 +21,12 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install macproxy",
-                "id":"macproxy",
+                "description": "Install xbox360_netiso",
+                "id":"xbox360_netiso",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "macproxy",
+                "command": "xbox360_netiso",
                 "args": ""
             },
             {
@@ -35,9 +35,9 @@
                 "description": "Start service",
                 "id":"",
                 "prompt": "",
-                "type": "service_start",
+                "type": "service_enable_start",
                 "group":"",
-                "command": "macproxy",
+                "command": "xbox360_netiso",
                 "args": ""
             },
             {
@@ -46,9 +46,9 @@
                 "description": "Query service status",
                 "id":"",
                 "prompt": "",
-                "type":"service_status",
+                "type": "service_status",
                 "group":"",
-                "command": "macproxy",
+                "command": "xbox360_netiso",
                 "args": ""
             },
             {
@@ -57,9 +57,9 @@
                 "description": "Stop the service",
                 "id":"",
                 "prompt": "",
-                "type": "service_stop",
+                "type": "service_disable_stop",
                 "group":"",
-                "command": "macproxy",
+                "command": "xbox360_netiso",
                 "args": ""
             },
             {
@@ -70,7 +70,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "macproxy.md",
+                "command": "Samba.md",
                 "args": ""
             }
         ]
