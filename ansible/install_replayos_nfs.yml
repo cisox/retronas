@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
 
   vars:
     my_name: "ReplayOS NFS"
@@ -9,15 +9,15 @@
     module_name: "replayos_nfs"
     system_key: "replayos"
 
-    templates:
-      - { name: "retronas_ps2.conf", dest: "/etc/samba" }
-
     top_level_paths:
       - { name: "roms",  enabled: yes,  generic: "roms",  systems: yes }
       - { name: "saves", enabled: yes,  generic: "saves", systems: yes }
       - { name: "bios",  enabled: yes,  generic: "bios",  systems: yes }
 
-#    save_overrides:
+    templates:
+      - { name: "retronas_replayos_nfs.conf",  name_dest: "retronas_replayos.conf", dest: "/etc/exports.d" }
+
+  #    save_overrides:
 #      - { name: "amstrad_cpc", src: "amstrad/cpc" }
 #      - { name: "arcade_dc", src: "arcade/naomi" }
 #      - { name: "arcade_fbneo", src: "finalburn/fbneo" }
@@ -72,17 +72,6 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.nfs
-
-    - name: "{{ my_name }} - add nfs export"
-      ansible.builtin.lineinfile:
-        path: /etc/exports
-        line: "{{ my_dir }} *(rw,async,fsid=99,all_squash,anonuid={{ retronas_user_id }},anongid={{ retronas_group_id }})"
-        state: present
-        create: true
-
-    - name: "{{ my_name }} - re-export the NFS shares"
-      ansible.builtin.command: exportfs -ra
-      changed_when: true
 
 #    - name: "{{ my_name }} - create custom save directories"
 #      ansible.builtin.file:
