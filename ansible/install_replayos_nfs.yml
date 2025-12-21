@@ -5,7 +5,6 @@
   vars:
     my_name: "ReplayOS NFS"
     my_file: "install_replayos_nfs"
-    my_dir: "{{ retronas_path}}/replayos"
     module_name: "replayos"
     system_key: "replayos"
 
@@ -13,6 +12,9 @@
       - { name: "roms",  enabled: yes,  generic: "roms",  systems: yes }
       - { name: "saves", enabled: yes,  generic: "saves", systems: yes }
       - { name: "bios",  enabled: yes,  generic: "bios",  systems: yes }
+
+    templates:
+      - { name: "retronas_replayos_nfs.conf",  name_dest: "retronas_replayos.exports", dest: "/etc/exports.d" }
 
   #    save_overrides:
 #      - { name: "amstrad_cpc", src: "amstrad/cpc" }
@@ -69,22 +71,6 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.nfs
-
-    - name: "{{ my_name }} - Ensure /etc/exports.d exists"
-      ansible.builtin.file:
-        path: /etc/exports.d
-        state: directory
-        mode: '0755' # Sets the directory permissions
-        owner: root
-        group: root
-
-    - name: "{{ my_name }} - Deploy NFS export configuration"
-      ansible.builtin.template:
-        src: "{{ my_file}}/retronas_replayos_nfs.conf"
-        dest: "/etc/exports.d/retronas_replayos.exports"
-        owner: root
-        group: root
-        mode: '0644'
 
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
