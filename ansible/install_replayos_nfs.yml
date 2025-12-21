@@ -3,10 +3,14 @@
   gather_facts: false
 
   vars:
-    my_name: "ReplayOS CIFS"
-    my_file: "install_replayos_cifs"
-    module_name: "replayos_cifs"
+    my_name: "ReplayOS NFS"
+    my_file: "install_replayos_nfs"
+    my_dir: "{{ retronas_path}}/replayos"
+    module_name: "replayos_nfs"
     system_key: "replayos"
+
+    templates:
+      - { name: "retronas_ps2.conf", dest: "/etc/samba" }
 
     top_level_paths:
       - { name: "roms",  enabled: yes,  generic: "roms",  systems: yes }
@@ -69,6 +73,17 @@
     - ansible.builtin.import_role:
         name: retronas.role.nfs
 
+    - name: "{{ my_name }} - add nfs export"
+      ansible.builtin.lineinfile:
+        path: /etc/exports
+        line: "{{ my_dir }} *(rw,async,fsid=99,all_squash,anonuid={{ retronas_user_id }},anongid={{ retronas_group_id }})"
+        state: present
+        create: true
+
+    - name: "{{ my_name }} - re-export the NFS shares"
+      ansible.builtin.command: exportfs -ra
+      changed_when: true
+
 #    - name: "{{ my_name }} - create custom save directories"
 #      ansible.builtin.file:
 #        dest: "{{ retronas_path }}/{{ item.1 }}/{{ item.0.src|lower }}"
@@ -85,10 +100,6 @@
 #      with_nested:
 #        - "{{ save_overrides }}"
 #        - ["saves"]
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      when: dirs_only is false
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
