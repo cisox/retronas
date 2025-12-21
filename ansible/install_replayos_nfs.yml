@@ -80,7 +80,7 @@
 
     - name: "{{ my_name }} - Deploy NFS export configuration"
       ansible.builtin.template:
-        src: "retronas_replayos_nfs.conf"
+        src: "{{ my_file}}/retronas_replayos_nfs.conf"
         dest: "/etc/exports.d/retronas_replayos.exports"
         owner: root
         group: root
