@@ -11,53 +11,10 @@
     top_level_paths:
       - { name: "roms",  enabled: yes,  generic: "roms",  systems: yes }
       - { name: "saves", enabled: yes,  generic: "saves", systems: yes }
-      - { name: "bios",  enabled: yes,  generic: "bios",  systems: yes }
+      - { name: "bios",  enabled: yes,  generic: "bios",  systems: no }
 
     templates:
       - { name: "retronas_replayos_nfs.conf",  name_dest: "retronas_replayos.exports", dest: "/etc/exports.d" }
-
-  #    save_overrides:
-#      - { name: "amstrad_cpc", src: "amstrad/cpc" }
-#      - { name: "arcade_dc", src: "arcade/naomi" }
-#      - { name: "arcade_fbneo", src: "finalburn/fbneo" }
-#      - { name: "arcade_mame", src: "mame/mame" }
-#      - { name: "arcade_mame_2k3p", src: "mame/mame2003p" }
-#      - { name: "atari_2600", src: "atari/2600" }
-#      - { name: "atari_5200", src: "atari/5200" }
-#      - { name: "atari_7800", src: "atari/7800" }
-#      - { name: "atari_jaguar", src: "atari/jaguar" }
-#      - { name: "atari_lynx", src: "atari/lynx" }
-#      - { name: "commodore_ami", src: "commodore/amiga" }
-#      - { name: "commodore_amicd", src: "commodore/amigacd32" }
-#      - { name: "commodore_c64", src: "commodore/commodore64" }
-#      - { name: "ibm_pc", src: "other/intel_x86" }
-#      - { name: "microsoft_msx", src: "microsoft/msx" }
-#      - { name: "nec_pce", src: "nec/pcengine" }
-#      - { name: "nec_pcecd", src: "nec/pcenginecd" }
-#      - { name: "nintendo_ds", src: "nintendo/ds" }
-#      - { name: "nintendo_gb", src: "nintendo/gameboy" }
-#      - { name: "nintendo_gba", src: "nintendo/gameboyadvance" }
-#      - { name: "nintendo_gbc", src: "nintendo/gameboycolor" }
-#      - { name: "nintendo_n64", src: "nintendo/nintendo64" }
-#      - { name: "nintendo_nes", src: "nintendo/famicom" }
-#      - { name: "nintendo_snes", src: "nintendo/superfamicom" }
-#      - { name: "panasonic_3do", src: "panasonic/3do" }
-#      - { name: "philips_cdi", src: "philips/cdi" }
-#      - { name: "scummvm", src: "other/scummvm" }
-#      - { name: "sega_32x", src: "sega/32x" }
-#      - { name: "sega_cd", src: "sega/megacd" }
-#      - { name: "sega_dc", src: "sega/dreamcast" }
-#      - { name: "sega_gg", src: "sega/gamegear" }
-#      - { name: "sega_sg", src: "sega/sg1000" }
-#      - { name: "sega_smd", src: "sega/megadrive" }
-#      - { name: "sega_sms", src: "sega/mastersystem" }
-#      - { name: "sega_st", src: "sega/saturn" }
-#      - { name: "sharp_x68k", src: "sharp/x68000" }
-#      - { name: "sinclair_zx", src: "sinclair/zxspectrum" }
-#      - { name: "snk_ng", src: "snk/neogeo" }
-#      - { name: "snk_ngcd", src: "snk/neogeocd" }
-#      - { name: "snk_ngp", src: "snk/neogeopocket" }
-#      - { name: "sony_psx", src: "sony/playstation1" }
 
   tasks:
     - name: "{{ my_name }} - Load RetroNAS config"
@@ -74,23 +31,6 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
-
-    #    - name: "{{ my_name }} - create custom save directories"
-#      ansible.builtin.file:
-#        dest: "{{ retronas_path }}/{{ item.1 }}/{{ item.0.src|lower }}"
-#        state: directory
-#      with_nested:
-#        - "{{ save_overrides }}"
-#        - ["saves"]
-#
-#    - name: "{{ my_name }} - create custom save links"
-#      ansible.builtin.file:
-#        src: "../../{{ item.1 }}/{{ item.0.src|lower }}"
-#        dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1 }}/{{ item.0.name }}"
-#        state: link
-#      with_nested:
-#        - "{{ save_overrides }}"
-#        - ["saves"]
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
