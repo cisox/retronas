@@ -704,13 +704,13 @@
       },
       {
         "index": "65",
-        "title": "replayos-nfs",
-        "description": "ReplayOS NFS config",
-        "id": "replayos-nfs",
+        "title": "replayos",
+        "description": "ReplayOS config",
+        "id": "replayos",
         "prompt": "",
         "type": "install",
         "group": "",
-        "command": "replayos_nfs",
+        "command": "replayos",
         "args": ""
       },
       {

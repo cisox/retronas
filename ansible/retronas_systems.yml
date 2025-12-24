@@ -387,7 +387,7 @@ system_ouya:
 system_panic:
   - { src: "panic/playdate", last: "", mister: "", replayos: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "playdate", replayfpgaarcade: "", retrodeck: "", romm: "playdate", pretty_name: "Panic Playdate" }
 system_panasonic:
-  - { src: "panasonic/3do", last: "other/3do", mister: "", replayos: "panasonic_3d0", retropie: "", batocera: "3do", recalbox: "3do", retroarch: "The 3DO Company - 3DO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "3do", smdb: "", freestation: "", analoguepocket: "", emudeck: "3do", igdb: "3do", replayfpgaarcade: "", retrodeck: "3do", romm: "3do", pretty_name: "Panasonic 3DO" }
+  - { src: "panasonic/3do", last: "other/3do", mister: "", replayos: "panasonic_3do", retropie: "", batocera: "3do", recalbox: "3do", retroarch: "The 3DO Company - 3DO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "3do", smdb: "", freestation: "", analoguepocket: "", emudeck: "3do", igdb: "3do", replayfpgaarcade: "", retrodeck: "3do", romm: "3do", pretty_name: "Panasonic 3DO" }
 system_pelvarazdin:
   - { src: "pelvarazdin/orao", last: "other/pelvarazdin_orao", mister: "ORAO", replayos: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Pelvarazdin Orao" }
 system_philips:

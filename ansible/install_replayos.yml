@@ -3,8 +3,8 @@
   gather_facts: false
 
   vars:
-    my_name: "ReplayOS NFS"
-    my_file: "install_replayos_nfs"
+    my_name: "ReplayOS"
+    my_file: "install_replayos"
     module_name: "replayos"
     system_key: "replayos"
 
@@ -12,9 +12,6 @@
       - { name: "roms",  enabled: yes,  generic: "roms",  systems: yes }
       - { name: "saves", enabled: yes,  generic: "saves", systems: yes }
       - { name: "bios",  enabled: yes,  generic: "bios",  systems: no }
-
-    templates:
-      - { name: "retronas_replayos_nfs.conf",  name_dest: "retronas_replayos.exports", dest: "/etc/exports.d" }
 
   tasks:
     - name: "{{ my_name }} - Load RetroNAS config"
@@ -25,9 +22,6 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.extradirs
-
-    - ansible.builtin.import_role:
-        name: retronas.role.nfs
 
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
